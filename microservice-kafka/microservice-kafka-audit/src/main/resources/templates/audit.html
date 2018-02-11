@@ -14,9 +14,9 @@
 				<b>Customer</b>
 			</div>
 			<div class="col-md-2"
-				th:text="${invoice.customer.firstname}+' '+${invoice.customer.name}"></div>
+				th:text="${audit.customer.firstname}+' '+${audit.customer.name}"></div>
 			<div class="col-md-2"
-				th:text="${invoice.customer.email}"></div>
+				th:text="${audit.customer.email}"></div>
 		</div>
 
 		<div class="row">
@@ -27,23 +27,23 @@
 			<div class="col-md-2">
 				<b>Street</b>
 			</div>
-			<div class="col-md-2" th:text="${invoice.billingAddress.street}"></div>
+			<div class="col-md-2" th:text="${audit.billingAddress.street}"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-2">
 				<b>Zip</b>
 			</div>
-			<div class="col-md-2" th:text="${invoice.billingAddress.zip}"></div>
+			<div class="col-md-2" th:text="${audit.billingAddress.zip}"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-2">
 				<b>City</b>
 			</div>
-			<div class="col-md-2" th:text="${invoice.billingAddress.city}"></div>
+			<div class="col-md-2" th:text="${audit.billingAddress.city}"></div>
 		</div>
 
 		<div class="row">
-			<h2>invoice Lines</h2>
+			<h2>audit Lines</h2>
 		</div>
 
 		<div class="row">
@@ -64,12 +64,12 @@
 			</div>
 		</div>
 
-		<div class="row" th:each="invoiceLine : ${invoice.invoiceLine}">
-			<div class="col-md-2" th:text="${invoiceLine.count}"></div>
-			<div class="col-md-2" th:text="${invoiceLine.item.itemId}"></div>
-			<div class="col-md-2" th:text="${invoiceLine.item.name}"></div>
-			<div class="col-md-2" th:text="${invoiceLine.item.price}"></div>
-			<div class="col-md-2" th:text="${invoiceLine.totalAmount()}"></div>
+		<div class="row" th:each="auditLine : ${audit.auditLine}">
+			<div class="col-md-2" th:text="${auditLine.count}"></div>
+			<div class="col-md-2" th:text="${auditLine.item.itemId}"></div>
+			<div class="col-md-2" th:text="${auditLine.item.name}"></div>
+			<div class="col-md-2" th:text="${auditLine.item.price}"></div>
+			<div class="col-md-2" th:text="${auditLine.totalAmount()}"></div>
 		</div>
 
 	</div>

@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ewolff.microservice.audit.InvoiceRepository;
+import com.ewolff.microservice.audit.AuditRepository;
 
 @Controller
-public class InvoiceController {
+public class AuditController {
 
-	private InvoiceRepository invoiceRepository;
+	private AuditRepository auditRepository;
 
 	@Autowired
-	public InvoiceController(InvoiceRepository invoiceRepository) {
-		this.invoiceRepository = invoiceRepository;
+	public AuditController(AuditRepository auditRepository) {
+		this.auditRepository = auditRepository;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
 	public ModelAndView Item(@PathVariable("id") long id) {
-		return new ModelAndView("invoice", "invoice", invoiceRepository.findOne(id));
+		return new ModelAndView("audit", "audit", auditRepository.findOne(id));
 	}
 
 	@RequestMapping("/")
 	public ModelAndView ItemList() {
-		return new ModelAndView("invoicelist", "invoices", invoiceRepository.findAll());
+		return new ModelAndView("auditlist", "audits", auditRepository.findAll());
 	}
 
 }

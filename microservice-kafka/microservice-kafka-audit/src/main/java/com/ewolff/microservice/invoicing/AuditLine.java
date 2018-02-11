@@ -11,7 +11,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
-public class InvoiceLine {
+public class AuditLine {
 
 	@Column(name = "F_COUNT")
 	private int count;
@@ -31,10 +31,10 @@ public class InvoiceLine {
 		this.item = item;
 	}
 
-	public InvoiceLine() {
+	public AuditLine() {
 	}
 
-	public InvoiceLine(int count, Item item) {
+	public AuditLine(int count, Item item) {
 		this.count = count;
 		this.item = item;
 	}

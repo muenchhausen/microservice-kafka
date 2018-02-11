@@ -16,12 +16,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = InvoiceTestApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = AuditTestApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("test")
-public class InvoiceKafkaTest {
+public class AuditKafkaTest {
 
 	@Autowired
-	private InvoiceRepository invoiceRepository;
+	private AuditRepository auditRepository;
 
 	@Autowired
 	public KafkaTemplate<String, String> kafkaTemplate;
@@ -36,14 +36,14 @@ public class InvoiceKafkaTest {
 
 	@Test
 	public void orderAreReceived() throws Exception {
-		long countBefore = invoiceRepository.count();
+		long countBefore = auditRepository.count();
 		kafkaTemplate.send("order", order());
 		int i = 0;
-		while (invoiceRepository.count() == countBefore && i < 10) {
+		while (auditRepository.count() == countBefore && i < 10) {
 			Thread.sleep(1000);
 			i++;
 		}
-		assertThat(invoiceRepository.count(), is(greaterThan(countBefore)));
+		assertThat(auditRepository.count(), is(greaterThan(countBefore)));
 	}
 
 	private String order() {

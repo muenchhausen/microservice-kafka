@@ -16,7 +16,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
-public class Invoice {
+public class Audit {
 
 	@Id
 	private long id;
@@ -30,20 +30,20 @@ public class Invoice {
 	private Address billingAddress = new Address();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<InvoiceLine> invoiceLine;
+	private List<AuditLine> auditLine;
 
-	public Invoice() {
+	public Audit() {
 		super();
-		invoiceLine = new ArrayList<InvoiceLine>();
+		auditLine = new ArrayList<AuditLine>();
 	}
 
-	public Invoice(long id, Customer customer, Date updated, Address billingAddress, List<InvoiceLine> invoiceLine) {
+	public Audit(long id, Customer customer, Date updated, Address billingAddress, List<AuditLine> auditLine) {
 		super();
 		this.id = id;
 		this.customer = customer;
 		this.updated = updated;
 		this.billingAddress = billingAddress;
-		this.invoiceLine = invoiceLine;
+		this.auditLine = auditLine;
 	}
 
 	public Address getBillingAddress() {
@@ -78,29 +78,29 @@ public class Invoice {
 		this.customer = customer;
 	}
 
-	public List<InvoiceLine> getInvoiceLine() {
-		return invoiceLine;
+	public List<AuditLine> getAuditLine() {
+		return auditLine;
 	}
 
-	public void setInvoiceLine(List<InvoiceLine> invoiceLine) {
-		this.invoiceLine = invoiceLine;
+	public void setAuditLine(List<AuditLine> auditLine) {
+		this.auditLine = auditLine;
 	}
 
 	@Transient
-	public void setOrderLine(List<InvoiceLine> orderLine) {
-		this.invoiceLine = orderLine;
+	public void setOrderLine(List<AuditLine> orderLine) {
+		this.auditLine = orderLine;
 	}
 
 	public void addLine(int count, Item item) {
-		this.invoiceLine.add(new InvoiceLine(count, item));
+		this.auditLine.add(new AuditLine(count, item));
 	}
 
 	public int getNumberOfLines() {
-		return invoiceLine.size();
+		return auditLine.size();
 	}
 
 	public double totalAmount() {
-		return invoiceLine.stream().map((ol) -> ol.getCount() * ol.getItem().getPrice()).reduce(0.0,
+		return auditLine.stream().map((ol) -> ol.getCount() * ol.getItem().getPrice()).reduce(0.0,
 				(d1, d2) -> d1 + d2);
 	}
 

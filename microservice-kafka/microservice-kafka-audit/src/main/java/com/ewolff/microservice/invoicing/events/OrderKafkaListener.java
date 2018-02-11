@@ -6,25 +6,25 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
-import com.ewolff.microservice.audit.Invoice;
-import com.ewolff.microservice.audit.InvoiceService;
+import com.ewolff.microservice.audit.Audit;
+import com.ewolff.microservice.audit.AuditService;
 
 @Component
 public class OrderKafkaListener {
 
 	private final Logger log = LoggerFactory.getLogger(OrderKafkaListener.class);
 
-	private InvoiceService invoiceService;
+	private AuditService auditService;
 
-	public OrderKafkaListener(InvoiceService invoiceService) {
+	public OrderKafkaListener(AuditService auditService) {
 		super();
-		this.invoiceService = invoiceService;
+		this.auditService = auditService;
 	}
 
 	@KafkaListener(topics = "order")
-	public void order(Invoice invoice, Acknowledgment acknowledgment) {
-		log.info("Revceived invoice " + invoice.getId());
-		invoiceService.generateInvoice(invoice);
+	public void order(Audit audit, Acknowledgment acknowledgment) {
+		log.info("Revceived audit " + audit.getId());
+		auditService.generateAudit(audit);
 		acknowledgment.acknowledge();
 	}
 

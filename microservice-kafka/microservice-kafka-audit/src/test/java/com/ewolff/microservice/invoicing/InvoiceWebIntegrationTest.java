@@ -20,9 +20,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = InvoiceTestApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = AuditTestApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("test")
-public class InvoiceWebIntegrationTest {
+public class AuditWebIntegrationTest {
 
 	@LocalServerPort
 	private int serverPort;

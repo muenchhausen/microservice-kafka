@@ -17,16 +17,16 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${invoices.empty}">
-					<td colspan="4">No invoices</td>
+				<tr th:if="${audits.empty}">
+					<td colspan="4">No audits</td>
 				</tr>
-				<tr th:each="invoice : ${invoices}">
-					<td><a href="invoice/1" th:href="${invoice.id}"
-						th:text="${invoice.id}">1</a></td>
+				<tr th:each="audit : ${audits}">
+					<td><a href="audit/1" th:href="${audit.id}"
+						th:text="${audit.id}">1</a></td>
 					<td
-						th:text="${invoice.customer.firstname} + ' ' + ${invoice.customer.name}">Firstname
+						th:text="${audit.customer.firstname} + ' ' + ${audit.customer.name}">Firstname
 						Name</td>
-					<td th:text="${invoice.totalAmount()}">42.0</td>
+					<td th:text="${audit.totalAmount()}">42.0</td>
 				</tr>
 			</tbody>
 		</table>

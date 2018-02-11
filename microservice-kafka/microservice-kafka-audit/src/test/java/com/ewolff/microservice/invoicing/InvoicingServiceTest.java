@@ -15,31 +15,31 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = InvoiceTestApp.class, webEnvironment = WebEnvironment.NONE)
+@SpringBootTest(classes = AuditTestApp.class, webEnvironment = WebEnvironment.NONE)
 @ActiveProfiles("test")
 public class auditServiceTest {
 
 	@Autowired
-	private InvoiceRepository invoiceRepository;
+	private AuditRepository auditRepository;
 
 	@Autowired
-	private InvoiceService invoiceService;
+	private AuditService auditService;
 
 	@Test
 	public void ensureIdempotencySecondCallIgnored() {
-		long countBefore = invoiceRepository.count();
-		Invoice invoice = new Invoice(42,
+		long countBefore = auditRepository.count();
+		Audit audit = new Audit(42,
 				new Customer(23, "Eberhard", "Wolff", "eberhard.wolff@innoq.com"),
-				new Date(0L), new Address("Krischstr. 100", "40789", "Monheim am Rhein"), new ArrayList<InvoiceLine>());
-		invoiceService.generateInvoice(invoice);
-		assertThat(invoiceRepository.count(), is(countBefore + 1));
-		assertThat(invoiceRepository.findOne(42L).getUpdated().getTime(), equalTo(0L));
-		invoice = new Invoice(42,
+				new Date(0L), new Address("Krischstr. 100", "40789", "Monheim am Rhein"), new ArrayList<AuditLine>());
+		auditService.generateAudit(audit);
+		assertThat(auditRepository.count(), is(countBefore + 1));
+		assertThat(auditRepository.findOne(42L).getUpdated().getTime(), equalTo(0L));
+		audit = new Audit(42,
 				new Customer(23, "Eberhard", "Wolff", "eberhard.wolff@innoq.com"),
-				new Date(), new Address("Krischstr. 100", "40789", "Monheim am Rhein"), new ArrayList<InvoiceLine>());
-		invoiceService.generateInvoice(invoice);
-		assertThat(invoiceRepository.count(), is(countBefore + 1));
-		assertThat(invoiceRepository.findOne(42L).getUpdated().getTime(), equalTo(0L));
+				new Date(), new Address("Krischstr. 100", "40789", "Monheim am Rhein"), new ArrayList<AuditLine>());
+		auditService.generateAudit(audit);
+		assertThat(auditRepository.count(), is(countBefore + 1));
+		assertThat(auditRepository.findOne(42L).getUpdated().getTime(), equalTo(0L));
 	}
 
 }
