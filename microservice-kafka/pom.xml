@@ -18,6 +18,7 @@
 		<module>microservice-kafka-order</module>
 		<module>microservice-kafka-shipping</module>
 		<module>microservice-kafka-invoicing</module>
+		<module>microservice-kafka-audit</module>
 	</modules>
 
 	<properties>

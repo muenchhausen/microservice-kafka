@@ -47,4 +47,10 @@ services:
      - postgres
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-
+  audit:
+    build: ../microservice-kafka/microservice-kafka-audit
+    links:
+     - kafka
+     - postgres
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
